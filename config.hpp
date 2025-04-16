@@ -42,7 +42,7 @@ NameList.push_back("王雅婷");
 NameList.push_back("文无道");
 NameList.push_back("白子菁");
 NameList.push_back("肖东山");
-NameList.push_back("肖睿");
+NameList.push_back("青焰灵");
 NameList.push_back("谢燕芝");
 NameList.push_back("谢雨希");
 NameList.push_back("谢慧林");
@@ -55,5 +55,5 @@ NameList.push_back("杨洁");
 NameList.push_back("余飞健");
 NameList.push_back("喻洪开");
 NameList.push_back("张艺磊");
-NameList.push_back("周子霖");
+NameList.push_back("王家杰");
 }

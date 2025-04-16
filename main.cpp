@@ -12,6 +12,10 @@ std::vector<std::string> NameList;
 std::vector<std::string> CurrentNameList;
 void initNamelist()
 {
+NameList.push_back("陈雯雯");
+NameList.push_back("胡同文");
+NameList.push_back("彭海军");
+NameList.push_back("周立君");
 NameList.push_back("熬齐文");
 NameList.push_back("曾京奥");
 NameList.push_back("陈嘉豪");
@@ -49,7 +53,7 @@ NameList.push_back("王雅婷");
 NameList.push_back("文天道");
 NameList.push_back("向子菁");
 NameList.push_back("肖东山");
-NameList.push_back("肖睿");
+NameList.push_back("恐爪森");
 NameList.push_back("谢媚芝");
 NameList.push_back("谢雨希");
 NameList.push_back("谢_吉吉_火韦");
@@ -62,7 +66,7 @@ NameList.push_back("杨洁");
 NameList.push_back("余飞健");
 NameList.push_back("喻祺开");
 NameList.push_back("张艺菡");
-NameList.push_back("周子霖");
+NameList.push_back("王家杰");
 }
 int maxX = 900, maxY = 600;
 
