@@ -47,13 +47,12 @@ public:
 		xyprintf(text_x, text_y, "%s", text.c_str());
 	}
 	
+	// clicked , process data and play cg
 	void handle(int x , int y , int event )override{
 		if(x >= this->x.load() && x <= this->x.load()+this->w.load()
 			&& y >= this->y.load() && y <= this->y.load()+this->h.load())
 		{
-			std::thread([this]() {
-				thgofora(this->x.load(), 1000, 1000, this->x);
-			}).detach();
+		
 		}
 	}
 };
