@@ -21,37 +21,41 @@ public:
 	}
 	
 	void draw() override {
-		// 绘制按钮背景
+		// draw background
 		setfillcolor(RGB(150, 150, 150));
 		bar(x, y, x + w, y + h);
 		
-		// 计算自适应字体大小（取宽高的最小值的5/6）
+		// figure out the size of fonts
 		const float font_height = std::min(w.load(), h.load()) / 6.0f*5.0f;
 		
-		// 设置透明黑体字体
+		// set fonts
 		setfont(font_height, 0, "Noto Sans CJK SC Thin");
 		setbkmode(TRANSPARENT);
-		setcolor(WHITE);  // 文字颜色设为白色
+		setcolor(WHITE); 
 		
-		// 计算文字居中位置
+		// figure out the pos of fonts
 		//std::string text = UTF8ToGBK(this->label);
 		std::string text = this->label;
 		const int text_width = textwidth(text.c_str());
 		const int text_height = textheight(text.c_str());
 		
-		// 文字绘制位置（水平垂直居中）
+		// text pos
 		const float text_x = x + (w - text_width) / 2;
 		const float text_y = y + (h - text_height) / 2;
 		
-		// 绘制文字
+		// draw
 		xyprintf(text_x, text_y, "%s", text.c_str());
 	}
 	
 	// clicked , process data and play cg
 	void handle(int x , int y , int event )override{
 		if(x >= this->x.load() && x <= this->x.load()+this->w.load()
-			&& y >= this->y.load() && y <= this->y.load()+this->h.load())
+			&& y >= this->y.load() && y <= this->y.load()+this->h.load()
+			&& this->isAble2Click == true)
 		{
+			std::thread thgo([this](){
+				thgofora(this->x , 1100 , 1000 ,this->x);
+			});thgo.join();
 		
 		}
 	}
