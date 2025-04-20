@@ -11,10 +11,10 @@ void drawloop()
 		cleardevice();
 		chbutton.draw();
 		chbroad.draw();
+		circatcher.draw();
 		delay_fps(60);
-	}
-}
-
+	}}
+ 
 void moveloop()
 {
 	while(true)
@@ -36,8 +36,7 @@ void mouseloop()
 		if (keystate(key_mouse_l)) { // if leftkey down
 			int mouse_x,mouse_y;
 			mousepos(&mouse_x,&mouse_y);
-			chbutton.handle(mouse_x , mouse_y ,1);
-			
+			chbutton.handle(mouse_x , mouse_y ,1);	
 		}
 	}
 }
@@ -46,7 +45,7 @@ int main()
 {
 	chbroad.readfromfile();
 	chbroad.initrand();
-	
+
 	initgraph(1200,800,INIT_RENDERMANUAL);
 	setrendermode(RENDER_MANUAL); // close auto swap
 	std::thread drawlp(drawloop);

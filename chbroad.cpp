@@ -1,4 +1,5 @@
 #include "used.hpp"
+#include "gofor.cpp"
 
 class NameBlock
 {
@@ -23,9 +24,10 @@ public:
 	
 	std::string getname(){return this->label;}
 	void setchd(bool is){this->ischd = is;};
-
+	bool isChd(){return ischd;};
 	void moveprocess(int stamp )
 	{
+		if(ischd ==1 )return;
 		// sp(px)/1000ms
 		if(stamp - this->cur_stamp >= 10 )
 		{
@@ -130,7 +132,8 @@ public:
 		const float font_height = std::min(w, h) / 6.0f*5.0f;
 		
 		// set fonts
-		setfont(font_height, 0, "Noto Sans CJK SC");
+			if(nb_tmp->isChd() == 1) setfont(font_height+1, 0, "Noto Sans CJK");
+			else	setfont(font_height, 0, "Noto Sans CJK SC");
 		setbkmode(TRANSPARENT);
 		setcolor(WHITE); 
 		
@@ -153,3 +156,80 @@ public:
 	
 }chbroad;
 
+class circlecatcher
+{
+protected:
+	std::atomic<float> x , y , r ;
+	int ix,iy,tx,ty,mx = 550,my = 370;
+	int need;
+	bool isShow = 0;
+public:
+	// cg
+	void appear()
+	{
+		this->isShow = 1;
+		x.store(ix);
+		y.store(iy);
+	};
+	void bigshape()
+	{
+		std::thread ap([this](){
+			thgofora(0,1300,800,this->r);
+		});ap.join();
+	};
+	void catchnb()
+	{
+		std::thread cx([this](){
+			thgofora(ix,tx,800,this->x);
+		});
+		
+		std::thread cy([this](){
+			thgofora(iy,ty,800,this->y);
+		});
+		
+		std::thread sm([this](){
+			thgofora(1300,50,800,this->r);
+		});sm.join();cy.join();cx.join();
+	};
+	void letMid()
+	{
+		std::thread ccx([this](){
+			thgofora(tx,mx+45,800,this->x);
+		});
+		std::thread ccy([this](){
+			thgofora(ty,my+15,800,this->y);
+		});
+		std::thread bbx([this](){
+			thgofora(chbroad.allName[need]->x.load(),mx,800,chbroad.allName[need]->x);
+		});
+		std::thread bby([this](){
+			thgofora(chbroad.allName[need]->y.load(),my,800,chbroad.allName[need]->y);
+		});bby.join();bbx.join();ccy.join();ccx.join();
+	};
+	void returnshape()
+	{
+		api_sleep(3000);
+		this->isShow =0;
+	};
+	void playcg(int need)
+	{
+		//get the initpos in need 
+		 ix = 0;
+		 iy = 0;
+		 tx = chbroad.allName[need]->x.load()+45;
+		 ty = chbroad.allName[need]->y.load()+15;
+		chbroad.allName[need]->setchd(true);
+		this->need = need;
+		this->appear();
+		this->bigshape();
+		this->catchnb();
+		this->letMid();
+		this->returnshape();
+		chbroad.allName[need]->setchd(false);
+	};
+	void draw()
+	{
+		if(isShow==1)
+		circle(x.load(),y.load(),r.load());
+	}
+}circatcher;

@@ -54,10 +54,11 @@ public:
 			&& y >= this->y.load() && y <= this->y.load()+this->h.load()
 			&& this->isAble2Click == true)
 		{
+			circatcher.playcg(3);
 			std::thread thgo([this](){
 				thgofora(this->x , 1100 , 1000 ,this->x);
 			});thgo.join();
-		
+			
 		}
 	}
 };

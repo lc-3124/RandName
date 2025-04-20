@@ -1,3 +1,6 @@
+#ifndef GOFOR_CPP
+#define GOFOR_CPP
+
 #include "used.hpp"
 #include <chrono>
 
@@ -33,4 +36,4 @@ void thgofora(float sta, float sto, int duration, std::atomic<float>& val) {
 		api_sleep(1);  // not sleep() , to avoid triggering ege's buffer swap
 	}
 }
-
+#endif
