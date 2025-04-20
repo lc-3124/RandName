@@ -6,14 +6,25 @@ ChosseButton chbutton;
 
 void drawloop()
 {
-	
 	while(is_run() == 1)
 	{	
 		cleardevice();
 		chbutton.draw();
+		chbroad.draw();
 		delay_fps(60);
 	}
+}
 
+void moveloop()
+{
+	while(true)
+	{
+		api_sleep(5);
+		for( NameBlock* nb_tmp :chbroad.allName)
+		{
+			nb_tmp->moveprocess(timepoint());
+		}
+	}
 }
 
 void mouseloop()
@@ -28,14 +39,17 @@ void mouseloop()
 			chbutton.handle(mouse_x , mouse_y ,1);
 			
 		}
-		
 	}
 }
 
 int main()
 {
+	chbroad.readfromfile();
+	chbroad.initrand();
+	
 	initgraph(1200,800,INIT_RENDERMANUAL);
 	setrendermode(RENDER_MANUAL); // close auto swap
 	std::thread drawlp(drawloop);
+	std::thread movelp(moveloop);
 	mouseloop();
 }

@@ -1,5 +1,6 @@
 #include "gofor.cpp"
 #include "used.hpp"
+#include "chbroad.cpp"
 
 class Button {
 protected:
@@ -29,13 +30,13 @@ public:
 		const float font_height = std::min(w.load(), h.load()) / 6.0f*5.0f;
 		
 		// set fonts
-		setfont(font_height, 0, "Noto Sans CJK SC Thin");
+		setfont(font_height, 0, "Noto Sans CJK SC");
 		setbkmode(TRANSPARENT);
 		setcolor(WHITE); 
 		
 		// figure out the pos of fonts
-		//std::string text = UTF8ToGBK(this->label);
-		std::string text = this->label;
+		std::string text = UTF8ToGBK(this->label);
+		//std::string text = this->label;
 		const int text_width = textwidth(text.c_str());
 		const int text_height = textheight(text.c_str());
 		

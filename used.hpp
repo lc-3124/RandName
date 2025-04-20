@@ -1,12 +1,20 @@
 #ifndef USED_HPP
 #define USED_HPP
 
+#define F_PI 3.1415926535
+#define NAME_PATH "Namelist.dat"
+#define NAME_PATH2 "Killedlist.dat"
+
 #include <ege.h>
 #include <thread>
 #include <vector>
 #include <atomic> 
 #include <string>
 #include <unistd.h>
+#include <random>
+#include <fstream>
+#include <iostream>
+#include <cmath>
 using namespace ege;
 
 std::string UTF8ToGBK(const std::string& str) {
