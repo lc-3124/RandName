@@ -1,9 +1,9 @@
 #include "Button.cpp"
-
+  		
 using namespace ege;
-
+		
 ChosseButton chbutton;
-
+		
 void drawloop()
 {
 	while(is_run() == 1)
@@ -25,8 +25,8 @@ void moveloop()
 			nb_tmp->moveprocess(timepoint());
 		}
 	}
-}
-
+}  
+		          
 void mouseloop()
 {      
 	while(true)
@@ -40,12 +40,12 @@ void mouseloop()
 		}
 	}
 }
+		
+int main(){
 
-int main()
-{
 	chbroad.readfromfile();
 	chbroad.initrand();
-
+		
 	initgraph(1200,800,INIT_RENDERMANUAL);
 	setrendermode(RENDER_MANUAL); // close auto swap
 	std::thread drawlp(drawloop);
