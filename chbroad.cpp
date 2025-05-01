@@ -63,6 +63,10 @@ public:
 	std::vector<NameBlock*> chdName,allName,killedname;
 	bool chOne(NameBlock *One)
 	{
+		for(int index ; allName.size() ; index ++)
+		{
+			
+		}
 		return 0;
 	};
 	bool delOne(NameBlock *One);
