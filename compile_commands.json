@@ -3,14 +3,12 @@
     "arguments": [
       "/usr/bin/x86_64-w64-mingw32-g++",
       "-c",
-      "-std=c++11",
-      "-D__USE_MINGW_ANSI_STDIO=0",
       "-o",
-      "RandName.exe",
+      "main.exe",
       "main.cpp"
     ],
     "directory": "/home/lc3124/clonework/RandName",
     "file": "/home/lc3124/clonework/RandName/main.cpp",
-    "output": "/home/lc3124/clonework/RandName/RandName.exe"
+    "output": "/home/lc3124/clonework/RandName/main.exe"
   }
 ]
