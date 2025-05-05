@@ -1,5 +1,5 @@
-#ifndef GOFOR_CPP
-#define GOFOR_CPP
+#ifndef _GOFOR_CPP
+#define _GOFOR_CPP
 
 #include "used.hpp"
 #include <chrono>
@@ -14,7 +14,7 @@ inline int timepoint()
     return static_cast< int >( std::chrono::duration_cast< std::chrono::milliseconds >( Clock::now().time_since_epoch() ).count() );
 }
 
-inline int timepast( int begintime )
+inline int timepast( int begintime  )
 {
     return timepoint() - begintime;
 }

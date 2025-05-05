@@ -4,9 +4,10 @@
 
 class Button {
 protected:
-	std::atomic<float> x=0, y=0, w=80, h=30;
+	std::atomic<float> x=0, y=0, w=160, h=30;
 	std::string label;
 	bool isAble2Click = true;
+	bool isShow= 1 ;
 	
 public:
 	virtual void handle(int x , int y , int event) = 0;
@@ -16,14 +17,15 @@ public:
 class ChosseButton : protected Button {
 public:
 	ChosseButton() {
-		this->x.store(0);
-		this->y.store(0);
-		this->label = "抽取";
+		this->x.store(1000);
+		this->y.store(750);
+		this->label = "狂按抽取";
 	}
 	
 	void draw() override {
+		if(this-> isShow !=1)return;
 		// draw background
-		setfillcolor(RGB(150, 150, 150));
+		setfillcolor(RGB(180, 150, 130));
 		bar(x, y, x + w, y + h);
 		
 		// figure out the size of fonts
@@ -54,11 +56,12 @@ public:
 			&& y >= this->y.load() && y <= this->y.load()+this->h.load()
 			&& this->isAble2Click == true)
 		{
-			circatcher.playcg(3);
-			std::thread thgo([this](){
-				thgofora(this->x , 1100 , 1000 ,this->x);
-			});thgo.join();
-			
+			this->isShow =0;
+			 this->isAble2Click = false;
+			  srand((unsigned)time(NULL)); 
+			circatcher.playcg(rand()%50);
+			this->isShow =1;
+			this->isAble2Click = true;
 		}
 	}
 };

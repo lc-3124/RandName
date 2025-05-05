@@ -1,6 +1,7 @@
 #include "used.hpp"
 #include "gofor.cpp"
-
+#include "mmsystem.h"
+//#pragma comment(lib,"winmm.lib")
 class NameBlock
 {
 protected:
@@ -60,7 +61,14 @@ protected:
 	
 public:
 	std::vector<NameBlock*> chdName,allName,killedname;
-	bool chOne(NameBlock *One);
+	bool chOne(NameBlock *One)
+	{
+		for(int index ; allName.size() ; index ++)
+		{
+			
+		}
+		return 0;
+	};
 	bool delOne(NameBlock *One);
 	bool getXyOne(int &x ,int &y ,NameBlock &One);
 	NameBlock*  randchOne();
@@ -98,10 +106,12 @@ public:
 	};
 
 	void initrand()
-	{
+	{ 
+	
+		 srand((unsigned)time(NULL));
 	for(NameBlock *nb_tmp : allName)
 		{
-			nb_tmp->sp.store(rand()%1000+10);
+			nb_tmp->sp.store(rand()%900+100);
 			nb_tmp->dr.store(float(rand()%360) /PI /2.0f);
 		}
 	};
@@ -125,7 +135,7 @@ public:
 		int w = nb_tmp->w.load();
 		int h = nb_tmp->h.load();
 		
-		setfillcolor(RGB(150, 150, 150));
+		setfillcolor(RGB(50, 50, 50));
 		bar(x, y, x + w, y + h);
 		
 		// figure out the size of fonts
@@ -193,6 +203,7 @@ public:
 	};
 	void letMid()
 	{
+		PlayAsync("wa.mp3");
 		std::thread ccx([this](){
 			thgofora(tx,mx+45,800,this->x);
 		});
@@ -205,11 +216,49 @@ public:
 		std::thread bby([this](){
 			thgofora(chbroad.allName[need]->y.load(),my,800,chbroad.allName[need]->y);
 		});bby.join();bbx.join();ccy.join();ccx.join();
+		
+		// big
+		
+		std::thread bg([this](){
+			thgoforb(50,300,400,this->r);
+		});
+		std::thread bx([this](){
+			thgoforb(chbroad.allName[need]->x.load(),mx-200,400,chbroad.allName[need]->x);
+		});
+		std::thread by([this](){
+			thgoforb(chbroad.allName[need]->y.load(),my-50,400,chbroad.allName[need]->y);
+		});
+		std::thread bw([this](){
+			thgoforb(chbroad.allName[need]->w.load(),490,400,chbroad.allName[need]->w);
+		});
+		std::thread bh([this](){
+			thgoforb(chbroad.allName[need]->h.load(),130,400,chbroad.allName[need]->h);
+		});bh.join();bw.join();by.join();bx.join();bg.join();
+		
+		api_sleep(3000);
+		
+		// big	 
+		std::thread bg2([this](){
+			thgoforb(300,10,300,this->r);
+		});
+		std::thread bx2([this](){
+			thgoforb(chbroad.allName[need]->x.load(),10,300,chbroad.allName[need]->x);
+		});
+		std::thread by2([this](){
+			thgoforb(chbroad.allName[need]->y.load(),10,300,chbroad.allName[need]->y);
+		});
+		std::thread bw2([this](){
+			thgoforb(chbroad.allName[need]->w.load(),10,300,chbroad.allName[need]->w);
+		});
+		std::thread bh2([this](){
+			thgoforb(chbroad.allName[need]->h.load(),10,300,chbroad.allName[need]->h);
+		});bh2.join();bw2.join();by2.join();bx2.join();bg2.join();
 	};
 	void returnshape()
 	{
-		api_sleep(3000);
 		this->isShow =0;
+		chbroad.allName[need]->w.store(90);
+		chbroad.allName[need]->h.store(30);
 	};
 	void playcg(int need)
 	{

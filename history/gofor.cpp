@@ -36,4 +36,22 @@ void thgofora(float sta, float sto, int duration, std::atomic<float>& val) {
 		api_sleep(1);  // not sleep() , to avoid triggering ege's buffer swap
 	}
 }
+void thgoforb(float sta, float sto, int duration, std::atomic<float>& val) {
+	int start = timepoint();
+	float a = -2.0f * (sto - sta) / float((duration * duration));
+	
+	while (true) {
+		int elapsed = timepast(start);
+		float t = static_cast<float>(elapsed);
+		
+		if (t >= duration) {
+			val.store(sto);
+			break;
+		}
+		
+		float current = sta + (sqrt((-a)*(sto-sta))) -a * t * t / 2.0f;
+		val.store(current);
+		api_sleep(1);  // not sleep() , to avoid triggering ege's buffer swap
+	}
+}
 #endif
