@@ -1,16 +1,20 @@
-#include "Broad.cpp"  
-#include "NameBlock.cpp"
-#include "draw.cpp" 
-#include "mouseclick.cpp"
-int main()  
+#include "fonts.cpp"
+
+int main()
 {
-    ege::initgraph( WIN_W, WIN_H );
-	ege::setrendermode(ege::RENDER_MANUAL); // close auto swap
-   
-	std::thread mouse_th(drawloop);
-	std::thread draw_th(mouseloop);
-	draw_th.join();
-	mouse_th.join();            
-	
+    InitWindow( 800, 600, "世界你好" );
+
+    SetTraceLogLevel( LOG_WARNING );
+    SetTargetFPS( 120 );
+    ExFonts hello;
+    hello.loadTtfFile( "ttf1.ttf", "ttf1" );
+    while ( !WindowShouldClose() )
+        {
+            hello.loadTextFormat( "你好世界 , hello world", "ttf1" );
+            BeginDrawing();
+            hello.drawText( 20, 20, 5, 32, RED );
+            EndDrawing();
+            hello.releaseFont();
+        }
     return 0;
 }

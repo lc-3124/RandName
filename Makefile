@@ -1,27 +1,11 @@
-BEAR_CC = x86_64-w64-mingw32-g++
-CC = wine "C:\\Program Files\\RedPanda-Cpp\\mingw64\\bin\\g++.exe"
+CC = g++
+FLAGS = -g -static -std=c++17 -lraylib 
+MAIN = main.cpp
+BIN = main.exe
+all: making running 
 
-INPUT = main.cpp
-OUTPUT = main.exe
+making : *.cpp 
+	${CC} ${MAIN} -o ${BIN} ${FLAGS}
 
 
-FLAG =	-Wl,--start-group \
-		-lgraphics \
-		-lgdi32 -lgdiplus \
-		-lole32 -loleaut32 -luuid \
-		-lmsvcrt -lmingwex \
-		-lkernel32 -luser32 \
-		-Wl,--end-group \
-		-static
-
-all: making  running
-
-making:
-	${CC} ${INPUT} -o ${OUTPUT} ${FLAG}
-	
-bear:
-	${BEAR_CC} ${INPUT} -o ${OUTPUT} ${FLAG}
-
-running:
-	wine ${OUTPUT}
 	
